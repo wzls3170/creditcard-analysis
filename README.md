@@ -10,10 +10,11 @@ This project predicts the probability of loan default for applicants using the *
 
 The project is structured into two distinct pipelines to evaluate the impact of feature engineering and dimensionality:
 
-### **Pipeline A: Baseline Model (Primary Features)**
+### **Pipeline A: Traditional Credit Scoring (Baseline)**
 * **Feature Set:** Focused on core applicant data (e.g., Income, Loan Amount, Age).
-* **Technique:** Simple preprocessing and **Logistic Regression**.
-* **Goal:** Establish a performance baseline for credit scoring.
+* **Preprocessing:** Implemented **WoE (Weight of Evidence) Binning** to transform raw variables into monotonic risk indicators.
+* **Feature Selection:** Utilized **IV (Information Value)** to filter out weak predictors (maintaining variables with IV > 0.02).
+* **Model:** Standard **Logistic Regression** to establish a baseline for credit scoring and probability of default (PD).
 
 ### **Pipeline B: Advanced Integrated Pipeline (187 Features)**
 * **Feature Set:** Expanded to 187 features by integrating external sources (`EXT_SOURCE_1/2/3`), credit bureau history, and previous applications.

@@ -15,7 +15,9 @@ The project is structured into two distinct pipelines to evaluate the impact of 
 * **Preprocessing:** Implemented **WoE (Weight of Evidence) Binning** to transform raw variables into monotonic risk indicators.
 * **Feature Selection:** Utilized **IV (Information Value)** to filter out weak predictors (maintaining variables with IV > 0.02).
 * **Model:** Standard **Logistic Regression** to establish a baseline for credit scoring and probability of default (PD).
-
+* **Robustness Metrics:** * **KS Statistic:** Measured the model's ability to separate good and bad applicants.
+    * **PSI (Population Stability Index):** Monitored distribution shifts between train and test sets to ensure model stability.
+  
 ### **Pipeline B: Advanced Integrated Pipeline (187 Features)**
 * **Feature Set:** Expanded to 187 features by integrating external sources (`EXT_SOURCE_1/2/3`), credit bureau history, and previous applications.
 * **Key Enhancements:**
@@ -25,10 +27,11 @@ The project is structured into two distinct pipelines to evaluate the impact of 
 
 ---
 
-## 📈 Model Performance Comparison
-* **Logistic Regression (Pipeline A):** Provided stable interpretability with basic features.
-* **Random Forest (Pipeline B):** Demonstrated superior AUC-ROC by capturing non-linear relationships among 187 features.
-* **Clustering Analysis:** Validated the scoring model by showing a clear inverse relationship between cluster risk and credit scores.
+## 📏 Evaluation Framework
+To ensure a fair comparison, Logic Regression, Decision Tree, Random Forest) were benchmarked using a consistent set of risk metrics:
+1. **ROC-AUC:** Measures the overall ranking ability and predictive accuracy.
+2. **KS Statistic (Kolmogorov-Smirnov):** Evaluates the maximum separation between "Good" and "Bad" loan applicants.
+3. **PSI (Population Stability Index):** Quantifies the distribution shift between Training and Test sets to ensure the models are robust against data drift.
 
 ---
 

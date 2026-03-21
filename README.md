@@ -19,11 +19,22 @@ The project is structured into two distinct pipelines to evaluate the impact of 
     * **PSI (Population Stability Index):** Monitored distribution shifts between train and test sets to ensure model stability.
   
 ### **Pipeline B: Advanced Integrated Pipeline (187 Features)**
-* **Feature Set:** Expanded to 187 features by integrating external sources (`EXT_SOURCE_1/2/3`), credit bureau history, and previous applications.
+* **Feature Set:** Expanded to **187 features** by integrating external sources (`EXT_SOURCE_1/2/3`), credit bureau history, and previous loan applications.
 * **Key Enhancements:**
-    * **Supervised Learning:** Implemented **Decision Tree** for logic visualization and **Random Forest** for ensemble predictive power.
-    * **Dimensionality Reduction:** Applied **PCA** to compress 187 features into **88 principal components** (80% variance retained).
-    * **Unsupervised Segmentation:** Performed **K-Means (K=5)** on PCA-transformed data to identify hidden risk personas.
+    * **Supervised Learning:** Implemented **Random Forest** as the primary ensemble model to capture complex non-linear relationships and compute **Feature Importance**.
+    * **Strategic Feature Selection:** Isolated the **Top 15 most influential features** (e.g., external scores, age, and credit amount) to create a high-signal subspace for robust modeling.
+    * **Unsupervised Segmentation:** Performed **K-Means Clustering ($K=5$)** on this optimized feature-selected data to identify distinct **Risk Personas**.
+    * **Risk Validation:** Cross-referenced clusters with actual **Default Rates**, successfully isolating a high-risk group (**Cluster 4**) with a **13.8% default rate**.
+
+#### **Final Cluster Risk Profile (Pipeline B)**
+
+| Cluster | Default Rate | Avg RF Probability | Population Size | Risk Profile |
+| :--- | :--- | :--- | :--- | :--- |
+| **4** | **13.8%** | **55.5%** | 90,392 | **High Risk** |
+| **0** | 6.0% | 39.8% | 57,964 | Moderate |
+| **3** | 5.8% | 39.8% | 84,841 | Moderate |
+| **1** | 5.6% | 38.3% | 48,375 | Low-Moderate |
+| **2** | **4.8%** | **37.1%** | 25,939 | **Low Risk** |
 
 ---
 

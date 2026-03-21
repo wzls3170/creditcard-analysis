@@ -4,8 +4,6 @@ This project predicts the probability of loan default for applicants using the *
 
 * **Competition:** [Home Credit Default Risk](https://www.kaggle.com/c/home-credit-default-risk)
 * **Dataset:** [Kaggle Data Link](https://www.kaggle.com/c/home-credit-default-risk/data)
-* **Course:** IE 7275 Data Mining - Northeastern University
-
 ---
 
 ## 🏗 Modeling Framework: Pipeline A vs. Pipeline B

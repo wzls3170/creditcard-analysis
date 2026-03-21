@@ -25,6 +25,7 @@ The project is structured into two distinct pipelines to evaluate the impact of 
     * **Strategic Feature Selection:** Isolated the **Top 15 most influential features** (e.g., external scores, age, and credit amount) to create a high-signal subspace for robust modeling.
     * **Unsupervised Segmentation:** Performed **K-Means Clustering ($K=5$)** on this optimized feature-selected data to identify distinct **Risk Personas**.
     * **Risk Validation:** Cross-referenced clusters with actual **Default Rates**, successfully isolating a high-risk group (**Cluster 4**) with a **13.8% default rate**.
+---
 
 #### **Final Cluster Risk Profile (Pipeline B)**
 
@@ -45,6 +46,21 @@ To ensure a fair comparison, Logic Regression, Decision Tree, Random Forest) wer
 3. **PSI (Population Stability Index):** Quantifies the distribution shift between Training and Test sets to ensure the models are robust against data drift.
 
 ---
+
+## 📊 Model Performance Comparison
+
+| Model | Pipeline | ROC-AUC | KS Statistic | PSI | Best For |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| **Random Forest** | **B** | **0.7767** | **0.4128** | **0.0009** | **Predictive Accuracy** |
+| **Logistic Regression** | **A** | 0.7291 | 0.3387 | 0.0016 | Interpretability (Baseline) |
+| **Decision Tree** | **B** | 0.7227 | 0.3277 | 0.0042 | Logic Visualization |
+
+### **Key Observations:**
+1. **Superior Discrimination:** Pipeline B's **Random Forest** achieved the highest **KS (0.4128)**, indicating a 22% improvement in separating default vs. non-default applicants compared to the baseline.
+2. **Exceptional Stability:** Despite the increased complexity of 187 features, the **PSI (0.0009)** for Random Forest remains near-zero, confirming that the model is highly robust and free from significant data drift.
+3. **The Power of Ensemble:** Moving from a single Decision Tree to a Random Forest resulted in a **+5.4% lift in AUC**, justifying the computational cost of ensemble learning.
+
+--- 
 
 ## 💻 Tech Stack
 * **Language:** Python 3.12

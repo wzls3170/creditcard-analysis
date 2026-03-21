@@ -25,20 +25,6 @@ The project is structured into two distinct pipelines to evaluate the impact of 
 
 ---
 
-## 📊 Key Results & Insights (Pipeline B)
-
-By utilizing 187 features, we achieved significant risk differentiation across five customer clusters:
-
-| Cluster ID | Default Rate | Avg Credit Score | Risk Level |
-| :--- | :--- | :--- | :--- |
-| **Cluster 0** | **9.90%** | 343.6 | **High Risk** |
-| **Cluster 3** | 8.19% | 351.8 | Moderate Risk |
-| **Cluster 4** | 5.71% | 373.7 | Low Risk |
-| **Cluster 1** | 5.48% | 357.6 | Low Risk |
-| **Cluster 2** | **5.35%** | **379.5** | **Premium Segment** |
-
----
-
 ## 📈 Model Performance Comparison
 * **Logistic Regression (Pipeline A):** Provided stable interpretability with basic features.
 * **Random Forest (Pipeline B):** Demonstrated superior AUC-ROC by capturing non-linear relationships among 187 features.

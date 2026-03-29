@@ -1,6 +1,6 @@
 # Home Credit Default Risk Analysis
 
-This project predicts the probability of loan default for applicants using the **Home Credit** dataset. It demonstrates a complete data science lifecycle, featuring a comparative study between a baseline pipeline and an advanced feature-engineered pipeline.
+In consumer lending, accurately identifying high-risk applicants reduces default losses while avoiding unfair rejection of creditworthy borrowers. This project builds a production-ready credit risk scoring system using the Home Credit dataset (300k+ applicants), comparing interpretable models required by financial regulators with ensemble methods optimized for predictive accuracy. It demonstrates a complete data science lifecycle, featuring a comparative study between a baseline pipeline and an advanced feature-engineered pipeline
 
 * **Competition:** [Home Credit Default Risk](https://www.kaggle.com/c/home-credit-default-risk)
 * **Dataset:** [Kaggle Data Link](https://www.kaggle.com/c/home-credit-default-risk/data)

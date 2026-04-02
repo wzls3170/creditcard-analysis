@@ -1,4 +1,4 @@
-# Home Credit Default Risk Analysis
+# Home Credit Default Risk Analysis & ML Pipeline
 
 In consumer lending, accurately identifying high-risk applicants reduces default losses while avoiding unfair rejection of creditworthy borrowers. This project builds a production-ready credit risk scoring system using the Home Credit dataset (300k+ applicants), comparing interpretable models required by financial regulators with ensemble methods optimized for predictive accuracy. It demonstrates a complete data science lifecycle, featuring a comparative study between a baseline pipeline and an advanced feature-engineered pipeline
 
@@ -6,6 +6,54 @@ In consumer lending, accurately identifying high-risk applicants reduces default
 * **Dataset:** [Kaggle Data Link](https://www.kaggle.com/c/home-credit-default-risk/data)
 ---
 
+## Architecture
+
+```mermaid
+graph TD
+    A[(Raw CSV Data)] --> B[ETL: Clean & Ingest]
+    B --> C[(PostgreSQL on AWS EC2)]
+    C --> D[Load Batch Predictions]
+    D --> E[(Predictions + Clusters stored in PostgreSQL)]
+    F[Apache Airflow] -->|Daily @ 1am| B
+    F -->|Triggers| D
+```
+---
+## Engineering Highlights
+
+- **Automated Workflow:** Orchestrated end-to-end data pipeline with Apache Airflow, scheduling daily ETL and batch scoring on AWS EC2.
+- **Containerized Infrastructure:** Deployed PostgreSQL and pipeline execution environment using Docker and Docker Compose, ensuring environment consistency.
+- **Model Stability Monitoring:** Implemented PSI (Population Stability Index) to detect data drift; Random Forest achieved near-zero drift (PSI = 0.0009) across 187 features.
+- **Batch Inference Architecture:** Serialized trained models via joblib following a cost-efficient batch processing pattern suitable for financial scoring use cases where real-time inference is not required.
+---
+
+
+
+## Tech Stack & Infrastructure
+
+- **Cloud:** AWS EC2 (Ubuntu)
+- **Database:** PostgreSQL 15 (Docker)
+- **Orchestration:** Apache Airflow 2.8.1 (Docker Compose)
+- **Containerization:** Docker
+- **Pipeline:** Python, pandas, scikit-learn, SQLAlchemy
+
+---
+
+## Project Structure
+```
+├── notebook/
+│   ├── credit_risk_analysis.ipynb   # EDA, feature engineering, model training
+│   └── model_output.ipynb           # Model export for deployment
+├── pipeline/
+│   ├── 01_clean.py                  # ETL: data cleaning and ingestion
+│   ├── 02_load_predictions.py       # Load batch predictions to PostgreSQL
+│   ├── Dockerfile                   # Container for pipeline execution
+│   └── requirements.txt
+├── dags/
+│   └── credit_pipeline.py           # Airflow DAG for daily scheduling
+└── README.md
+```
+
+---
 ## 🏗 Modeling Framework: Pipeline A vs. Pipeline B
 
 The project is structured into two distinct pipelines to evaluate the impact of feature engineering and dimensionality:
@@ -39,13 +87,6 @@ The project is structured into two distinct pipelines to evaluate the impact of 
 
 ---
 
-## 📏 Evaluation Framework
-To ensure a fair comparison, Logic Regression, Decision Tree, Random Forest) were benchmarked using a consistent set of risk metrics:
-1. **ROC-AUC:** Measures the overall ranking ability and predictive accuracy.
-2. **KS Statistic (Kolmogorov-Smirnov):** Evaluates the maximum separation between "Good" and "Bad" loan applicants.
-3. **PSI (Population Stability Index):** Quantifies the distribution shift between Training and Test sets to ensure the models are robust against data drift.
-
----
 
 ## 📊 Model Performance Comparison
 
@@ -62,10 +103,7 @@ To ensure a fair comparison, Logic Regression, Decision Tree, Random Forest) wer
 
 --- 
 
-## 💻 Tech Stack
-* **Language:** Python 3.12
-* **ML Framework:** `scikit-learn` (Logistic Regression, Decision Tree, Random Forest, PCA, KMeans)
-* **Data Handling:** `pandas`, `numpy`
-* **Visualization:** `matplotlib`, `seaborn`, `plotly`
 
----
+## Production Pipeline
+
+Models are trained on Kaggle and serialized via joblib. The production server handles daily ETL and batch inference, following a cost-efficient batch processing architecture suitable for credit scoring use cases where real-time inference is not required.
